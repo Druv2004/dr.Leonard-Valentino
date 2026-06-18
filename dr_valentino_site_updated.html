@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dr. Len Valentino | Researcher & Academic Physician</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0a2342;--blue:#1565c0;--blue-light:#1976d2;--blue-pale:#e8f0fe;--blue-mid:#bbdefb;
+  --gray-100:#f8f9fa;--gray-200:#e9ecef;--gray-300:#dee2e6;--gray-500:#6c757d;--gray-700:#495057;--gray-900:#212529;
+  --white:#ffffff;--accent:#00acc1;--accent-light:#e0f7fa;
+  --shadow:0 2px 16px rgba(10,35,66,0.09);--shadow-lg:0 8px 40px rgba(10,35,66,0.13);
+  --radius:10px;--radius-lg:16px;--transition:all 0.25s ease;
+}
+body{font-family:'Inter',sans-serif;color:var(--gray-900);background:var(--white);line-height:1.6}
+a{text-decoration:none;color:inherit}
+img{max-width:100%}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(255,255,255,0.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--gray-200);padding:0 2rem}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--navy)}
+.nav-logo span{color:var(--blue-light);font-size:0.75rem;font-family:'Inter',sans-serif;font-weight:400;display:block;letter-spacing:0.05em}
+.nav-links{display:flex;gap:0.25rem;list-style:none}
+.nav-links a{padding:0.4rem 0.75rem;border-radius:6px;font-size:0.85rem;font-weight:500;color:var(--gray-700);transition:var(--transition)}
+.nav-links a:hover,.nav-links a.active{background:var(--blue-pale);color:var(--blue)}
+.nav-cta{background:var(--blue);color:var(--white)!important;border-radius:6px;padding:0.4rem 1rem!important}
+.nav-cta:hover{background:var(--navy)!important;color:var(--white)!important}
+.hamburger{display:none;flex-direction:column;gap:4px;cursor:pointer;padding:4px}
+.hamburger span{width:22px;height:2px;background:var(--gray-700);border-radius:2px;transition:var(--transition)}
+
+/* PAGES */
+.page{display:none;padding-top:64px;min-height:100vh}
+.page.active{display:block}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1a3a6b 60%,#1565c0 100%);color:var(--white);padding:6rem 2rem 5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:600px;height:600px;border-radius:50%;background:rgba(255,255,255,0.03);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-20%;left:-5%;width:400px;height:400px;border-radius:50%;background:rgba(0,172,193,0.08);pointer-events:none}
+.hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:0.35rem 1rem;font-size:0.78rem;letter-spacing:0.05em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:3.2rem;font-weight:700;line-height:1.15;margin-bottom:0.75rem}
+.hero-title{font-size:1.1rem;color:rgba(255,255,255,0.75);margin-bottom:1.5rem;font-weight:400}
+.hero-intro{font-size:1rem;color:rgba(255,255,255,0.8);line-height:1.7;max-width:580px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.7rem 1.5rem;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;border:none;transition:var(--transition)}
+.btn-primary{background:var(--white);color:var(--navy)}
+.btn-primary:hover{background:var(--blue-pale);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,0.4)}
+.btn-outline:hover{background:rgba(255,255,255,0.1);transform:translateY(-1px)}
+.btn-blue{background:var(--blue);color:var(--white)}
+.btn-blue:hover{background:var(--navy);transform:translateY(-1px)}
+.hero-photo{position:relative;display:flex;justify-content:center}
+.hero-photo-frame{width:260px;height:300px;border-radius:var(--radius-lg);background:linear-gradient(160deg,#bbdefb 0%,#e3f2fd 100%);display:flex;align-items:center;justify-content:center;border:3px solid rgba(255,255,255,0.25);overflow:hidden;position:relative}
+.hero-photo-frame svg{width:140px;height:140px;opacity:0.6}
+.hero-photo-initials{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);background:rgba(10,35,66,0.7);color:var(--white);font-family:'Playfair Display',serif;font-size:1.8rem;padding:0.5rem 1.5rem;border-radius:8px;white-space:nowrap}
+
+/* STATS */
+.stats-bar{background:var(--white);border-bottom:1px solid var(--gray-200);padding:2rem}
+.stats-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.stat-item{text-align:center;padding:1rem;border-right:1px solid var(--gray-200)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-size:2rem;font-weight:700;color:var(--blue);font-family:'Playfair Display',serif}
+.stat-label{font-size:0.78rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:0.05em;margin-top:0.2rem}
+
+/* SECTIONS */
+.section{padding:5rem 2rem}
+.section-alt{background:var(--gray-100)}
+.container{max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:3rem}
+.section-eyebrow{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue-light);font-weight:600;margin-bottom:0.75rem}
+.section-title{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--navy);margin-bottom:1rem}
+.section-sub{color:var(--gray-500);max-width:560px;margin:0 auto;line-height:1.7}
+
+/* OVERVIEW */
+.overview-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+.overview-bio{font-size:1rem;color:var(--gray-700);line-height:1.8}
+.overview-bio p{margin-bottom:1rem}
+.tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
+.tag{background:var(--blue-pale);color:var(--blue);padding:0.3rem 0.8rem;border-radius:50px;font-size:0.8rem;font-weight:500}
+.tag-accent{background:var(--accent-light);color:#00838f}
+.mission-box{background:var(--navy);color:var(--white);padding:2rem;border-radius:var(--radius-lg);margin-top:1.5rem}
+.mission-box blockquote{font-family:'Playfair Display',serif;font-size:1.1rem;line-height:1.7;opacity:0.9;font-style:italic}
+.mission-box cite{display:block;margin-top:1rem;font-size:0.8rem;opacity:0.6;font-style:normal}
+
+/* CARDS */
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:1.5rem;transition:var(--transition)}
+.card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--blue-mid)}
+.card-tag{display:inline-block;background:var(--blue-pale);color:var(--blue);font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;padding:0.25rem 0.6rem;border-radius:4px;margin-bottom:0.75rem}
+.card-title{font-size:1.05rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem;line-height:1.4}
+.card-meta{font-size:0.82rem;color:var(--gray-500);margin-bottom:0.75rem;display:flex;gap:1rem;flex-wrap:wrap}
+.card-desc{font-size:0.9rem;color:var(--gray-700);line-height:1.65;margin-bottom:1rem}
+.card-actions{display:flex;gap:0.75rem;flex-wrap:wrap}
+.btn-sm{padding:0.4rem 0.9rem;font-size:0.8rem;border-radius:6px;font-weight:500;cursor:pointer;border:none;transition:var(--transition)}
+.btn-sm-primary{background:var(--blue);color:var(--white)}
+.btn-sm-primary:hover{background:var(--navy)}
+.btn-sm-outline{background:transparent;color:var(--blue);border:1px solid var(--blue-mid)}
+.btn-sm-outline:hover{background:var(--blue-pale)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0.5rem;top:0;bottom:0;width:2px;background:var(--blue-mid)}
+.tl-item{position:relative;padding:0 0 2rem 1.5rem}
+.tl-dot{position:absolute;left:-1.55rem;top:0.25rem;width:12px;height:12px;border-radius:50%;background:var(--blue);border:2px solid var(--white);box-shadow:0 0 0 2px var(--blue-mid)}
+.tl-year{font-size:0.78rem;font-weight:600;color:var(--blue-light);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.3rem}
+.tl-title{font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:0.2rem}
+.tl-sub{font-size:0.88rem;color:var(--gray-500)}
+
+/* PUBLICATIONS FILTER */
+.filter-bar{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:2rem;align-items:center}
+.filter-bar input{flex:1;min-width:200px;padding:0.5rem 1rem;border:1px solid var(--gray-300);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif}
+.filter-bar input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,0.1)}
+.filter-btn{padding:0.45rem 1rem;border-radius:50px;font-size:0.82rem;font-weight:500;cursor:pointer;border:1px solid var(--gray-300);background:var(--white);color:var(--gray-700);transition:var(--transition)}
+.filter-btn.active,.filter-btn:hover{background:var(--blue);color:var(--white);border-color:var(--blue)}
+
+/* ORG CARDS */
+.org-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:1.75rem;transition:var(--transition);display:flex;flex-direction:column;gap:1rem}
+.org-card:hover{box-shadow:var(--shadow-lg);border-color:var(--blue-mid)}
+.org-logo{width:56px;height:56px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;color:var(--blue);letter-spacing:0.02em}
+.org-name{font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:0.25rem}
+.org-role{font-size:0.82rem;color:var(--blue-light);font-weight:500;margin-bottom:0.5rem}
+.org-desc{font-size:0.88rem;color:var(--gray-700);line-height:1.65;flex:1}
+
+/* RESOURCES */
+.resource-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.25rem;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);transition:var(--transition)}
+.resource-item:hover{border-color:var(--blue-mid);box-shadow:var(--shadow)}
+.resource-icon{width:44px;height:44px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.2rem}
+.ri-pdf{background:#fce4ec}
+.ri-ppt{background:#fff3e0}
+.ri-doc{background:var(--blue-pale)}
+.resource-info{flex:1}
+.resource-name{font-size:0.92rem;font-weight:600;color:var(--navy)}
+.resource-meta{font-size:0.78rem;color:var(--gray-500);margin-top:0.15rem}
+.resource-dl{padding:0.35rem 0.85rem;border-radius:6px;font-size:0.78rem;font-weight:500;background:var(--blue-pale);color:var(--blue);border:none;cursor:pointer;transition:var(--transition)}
+.resource-dl:hover{background:var(--blue);color:var(--white)}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:3rem}
+.contact-info{display:flex;flex-direction:column;gap:1.25rem}
+.ci-item{display:flex;gap:1rem;align-items:flex-start}
+.ci-icon{width:44px;height:44px;border-radius:10px;background:var(--blue-pale);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;color:var(--blue)}
+.ci-label{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-500);margin-bottom:0.2rem}
+.ci-value{font-size:0.95rem;color:var(--navy);font-weight:500}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-label{font-size:0.82rem;font-weight:500;color:var(--gray-700)}
+.form-input,.form-textarea{padding:0.6rem 0.9rem;border:1px solid var(--gray-300);border-radius:8px;font-size:0.9rem;font-family:'Inter',sans-serif;transition:var(--transition);background:var(--white)}
+.form-input:focus,.form-textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(21,101,192,0.1)}
+.form-textarea{resize:vertical;min-height:120px}
+.submit-btn{background:var(--blue);color:var(--white);padding:0.7rem 2rem;border-radius:8px;font-size:0.9rem;font-weight:600;border:none;cursor:pointer;transition:var(--transition);align-self:flex-start}
+.submit-btn:hover{background:var(--navy)}
+
+/* ABOUT CV */
+.cv-viewer{background:var(--gray-100);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:3rem;text-align:center}
+.cv-viewer svg{color:var(--gray-300)}
+
+/* VIDEO EMBED */
+.video-thumb{position:relative;border-radius:var(--radius);overflow:hidden;background:var(--navy);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.video-thumb::after{content:'▶';position:absolute;font-size:2rem;color:white;background:rgba(21,101,192,0.8);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;line-height:56px;text-align:center}
+.video-label{font-size:0.85rem;color:var(--gray-700);margin-top:0.5rem;font-weight:500}
+
+/* FOOTER */
+footer{background:var(--navy);color:var(--white);padding:3rem 2rem 2rem}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2rem}
+.footer-brand p{font-size:0.88rem;opacity:0.6;margin-top:0.75rem;line-height:1.7}
+.footer-col h4{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.5;margin-bottom:1rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-col ul li a{font-size:0.88rem;opacity:0.7;transition:var(--transition)}
+.footer-col ul li a:hover{opacity:1;color:var(--blue-mid)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;font-size:0.82rem;opacity:0.5}
+
+/* FEATURED HIGHLIGHT */
+.highlight-strip{background:linear-gradient(135deg,var(--blue-pale),var(--accent-light));border:1px solid var(--blue-mid);border-radius:var(--radius-lg);padding:1.5rem;display:flex;gap:1.5rem;align-items:flex-start}
+.highlight-icon{width:48px;height:48px;border-radius:10px;background:var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1.3rem}
+.highlight-title{font-size:0.78rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-light);font-weight:600;margin-bottom:0.3rem}
+.highlight-text{font-size:0.95rem;font-weight:600;color:var(--navy);margin-bottom:0.3rem;line-height:1.4}
+.highlight-sub{font-size:0.82rem;color:var(--gray-500)}
+
+/* MEMBERSHIP BADGE */
+.membership{display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border:1px solid var(--gray-200);border-radius:var(--radius);background:var(--white)}
+.membership-dot{width:10px;height:10px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.membership-name{font-size:0.9rem;font-weight:500;color:var(--navy)}
+.membership-type{font-size:0.78rem;color:var(--gray-500)}
+
+/* ABOUT GRID */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+
+/* PROJECT STATUS */
+.proj-status{display:inline-block;padding:0.25rem 0.7rem;border-radius:50px;font-size:0.72rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.status-active{background:#e8f5e9;color:#2e7d32}
+.status-complete{background:#e3f2fd;color:#1565c0}
+.status-ongoing{background:#fff3e0;color:#e65100}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-photo{display:none}
+  .stats-inner{grid-template-columns:repeat(3,1fr)}
+  .stat-item:nth-child(3){border-right:none}
+  .overview-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:repeat(2,1fr)}
+  .footer-inner{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .hero h1{font-size:2.2rem}
+  .stats-inner{grid-template-columns:repeat(2,1fr)}
+  .stat-item:nth-child(2){border-right:none}
+  .grid-3,.grid-2{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-inner{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Dr. Leonard Valentino<span>MD · Translational Hematologist</span></div>
+    <ul class="nav-links">
+      <li><a href="#" class="active" onclick="showPage('home',this)">Home</a></li>
+      <li><a href="#" onclick="showPage('about',this)">About</a></li>
+      <li><a href="#" onclick="showPage('publications',this)">Publications</a></li>
+      <li><a href="#" onclick="showPage('presentations',this)">Presentations</a></li>
+      <li><a href="#" onclick="showPage('projects',this)">Projects</a></li>
+      <li><a href="#" onclick="showPage('organizations',this)">Organizations</a></li>
+      <li><a href="#" onclick="showPage('resources',this)">Resources</a></li>
+      <li><a href="#" class="nav-cta" onclick="showPage('contact',this)">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div id="mobile-menu" style="display:none;position:fixed;top:64px;left:0;right:0;background:white;z-index:999;border-bottom:1px solid var(--gray-200);padding:1rem 2rem">
+  <ul style="list-style:none;display:flex;flex-direction:column;gap:0.25rem">
+    <li><a href="#" onclick="showPage('home',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Home</a></li>
+    <li><a href="#" onclick="showPage('about',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">About</a></li>
+    <li><a href="#" onclick="showPage('publications',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Publications</a></li>
+    <li><a href="#" onclick="showPage('presentations',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Presentations</a></li>
+    <li><a href="#" onclick="showPage('projects',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Projects</a></li>
+    <li><a href="#" onclick="showPage('organizations',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Organizations</a></li>
+    <li><a href="#" onclick="showPage('resources',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--gray-700)">Resources</a></li>
+    <li><a href="#" onclick="showPage('contact',this);closeMobileMenu()" style="display:block;padding:0.5rem 0.75rem;border-radius:6px;font-size:0.9rem;font-weight:500;color:var(--blue)">Contact</a></li>
+  </ul>
+</div>
+
+<!-- ======== PAGE: HOME ======== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🩸 Translational Hematologist &amp; Health Equity Advocate</div>
+        <h1>Dr. Leonard Valentino</h1>
+        <p class="hero-title">MD · President, World Federation of Hemophilia USA · Entrepreneur in Residence, Pathway to Cures</p>
+        <p class="hero-intro">Experienced translational hematologist with over 30 years of strategic development across academia, biotechnology, and nonprofit leadership. Passionate about achieving health equity for people living with blood disorders.</p>
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="showPage('about',null)">📄 View CV</button>
+          <button class="btn btn-outline" onclick="showPage('publications',null)">📚 Publications</button>
+          <button class="btn btn-outline" onclick="showPage('contact',null)">✉️ Contact</button>
+        </div>
+      </div>
+      <div class="hero-photo">
+        <div class="hero-photo-frame" style="background:none;border:3px solid rgba(255,255,255,0.3)">
+          <img src="data:image/jpeg;base64,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VDpUrDjXiK/wQ8uR+ZP/ACbJJ55PzzSN/wCpia10pV0kvBm235FKUqQKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApWfTf9Jp03/Sai0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf8ASadN/wBJpaFGFKz6b/pNOm/6TS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf9Jp03/SaWhRhSs+m/wCk06b/AKTS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf8ASadN/wBJpaFGFKz6b/pNOm/6TS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf9Jp03/SaWhRhSs+m/wCk06b/AKTS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf8ASadN/wBJpaFGFKz6b/pNOm/6TS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf9Jp03/SaWhRhSs+m/wCk06b/AKTS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf8ASadN/wBJpaFGFKz6b/pNOm/6TS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf9Jp03/SaWhRhSs+m/wCk06b/AKTS0KMKVn03/SadN/0mloUYUrPpv+k06b/pNLQowpWfTf8ASa8MbjuppaFGNKy2P+k02P8ApNLQoxpWWx/0mgjc9lNLQoufpvin03xVp0hTpCsy5V/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xT6b4q06Qp0hQFX9N8U+m+KtOkKdIUBV/TfFPpvirTpCnSFAVf03xWMltwOPWrbpCsJYxhfvQFX9P8U+n+KsukKdIVAK36f4r2O24PHrVj0hWUUYw33ogSsUxXtKkHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYpivaUB5imK9pQHmKYr2lAeYrCUcL962Vrl7L96MGOKYr2lVB5isohw33ryvYuzfepQNlKUqQKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQClKUApSlAKUpQCtcvZfvWytcvZfvRg8pSlVAr2Ls33ryvYuzfepQP/Z" alt="Dr. Leonard Valentino" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:14px"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><div class="stat-num">30+</div><div class="stat-label">Years Experience</div></div>
+      <div class="stat-item"><div class="stat-num">64</div><div class="stat-label">Publications</div></div>
+      <div class="stat-item"><div class="stat-num">112</div><div class="stat-label">Presentations</div></div>
+      <div class="stat-item"><div class="stat-num">23</div><div class="stat-label">Research Projects</div></div>
+      <div class="stat-item"><div class="stat-num">9</div><div class="stat-label">Awards</div></div>
+    </div>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="section">
+    <div class="container">
+      <div class="overview-grid">
+        <div>
+          <div class="section-eyebrow">Professional Overview</div>
+          <h2 class="section-title" style="text-align:left">Physician. Researcher. Educator.</h2>
+          <div class="overview-bio">
+            <p>Dr. Leonard Valentino is a translational hematologist and health equity advocate with over 30 years of experience spanning academic medicine, biotechnology, and nonprofit leadership. He is a recognized leader in hemophilia research, drug development, and medical affairs.</p>
+            <p>He currently serves as President of the World Federation of Hemophilia USA and as Entrepreneur in Residence at Pathway to Cures — a mission-driven investment model advancing innovation across inheritable blood and bleeding disorders. He was previously Chief Executive Officer of the National Bleeding Disorders Foundation and VP of Strategy at Spark Therapeutics.</p>
+          </div>
+          <div class="tags" style="margin-bottom:1rem">
+            <span class="tag">Hematology</span>
+            <span class="tag">Coagulation Disorders</span>
+            <span class="tag">Translational Medicine</span>
+            <span class="tag">Rare Diseases</span>
+            <span class="tag tag-accent">Clinical Trials</span>
+            <span class="tag tag-accent">Hemophilia</span>
+          </div>
+          <div class="mission-box">
+            <blockquote>"With kindness and generosity of heart and soul — I am passionate about achieving health equity for people living with blood disorders."</blockquote>
+            <cite>— Dr. Leonard Valentino, MD</cite>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1.25rem">
+          <div class="highlight-strip">
+            <div class="highlight-icon">📄</div>
+            <div>
+              <div class="highlight-title">Featured Publication</div>
+              <div class="highlight-text">Novel Factor VIII Prophylaxis Regimens in Pediatric Hemophilia A</div>
+              <div class="highlight-sub">Journal of Thrombosis & Haemostasis · 2024</div>
+            </div>
+          </div>
+          <div class="highlight-strip">
+            <div class="highlight-icon">🔬</div>
+            <div>
+              <div class="highlight-title">Active Project</div>
+              <div class="highlight-text">Pathway to Cures — Venture Fund for Blood Disorders</div>
+              <div class="highlight-sub">National Bleeding Disorders Foundation · 2024–Present</div>
+            </div>
+          </div>
+          <div class="highlight-strip">
+            <div class="highlight-icon">🎤</div>
+            <div>
+              <div class="highlight-title">Latest Presentation</div>
+              <div class="highlight-text">WFH 2026 Congress — Global Action for Health Equity in Bleeding Disorders</div>
+              <div class="highlight-sub">World Federation of Hemophilia Congress · Kuala Lumpur · 2026</div>
+            </div>
+          </div>
+          <div style="background:var(--gray-100);border-radius:var(--radius-lg);padding:1.5rem">
+            <div style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.07em;color:var(--gray-500);margin-bottom:1rem;font-weight:600">Areas of Expertise</div>
+            <ul style="list-style:none;display:flex;flex-direction:column;gap:0.6rem">
+              <li style="display:flex;gap:0.5rem;font-size:0.9rem;color:var(--gray-700)"><span style="color:var(--blue)">▸</span>Hemophilia A &amp; B management and research</li>
+              <li style="display:flex;gap:0.5rem;font-size:0.9rem;color:var(--gray-700)"><span style="color:var(--blue)">▸</span>von Willebrand disease classification</li>
+              <li style="display:flex;gap:0.5rem;font-size:0.9rem;color:var(--gray-700)"><span style="color:var(--blue)">▸</span>Inhibitor development &amp; immune tolerance</li>
+              <li style="display:flex;gap:0.5rem;font-size:0.9rem;color:var(--gray-700)"><span style="color:var(--blue)">▸</span>Gene therapy for coagulation disorders</li>
+              <li style="display:flex;gap:0.5rem;font-size:0.9rem;color:var(--gray-700)"><span style="color:var(--blue)">▸</span>Rare bleeding disorders &amp; platelet function</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ======== PAGE: ABOUT ======== -->
+<div id="page-about" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">About</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem;margin-bottom:0.5rem">Dr. Leonard Valentino</h1>
+      <p style="color:rgba(255,255,255,0.7);font-size:1rem">MD · President, World Federation of Hemophilia USA · Entrepreneur in Residence, Pathway to Cures</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <div class="section-eyebrow">Biography</div>
+          <h2 class="section-title" style="text-align:left;font-size:1.7rem">Academic & Professional Journey</h2>
+          <div class="overview-bio">
+            <p>Dr. Leonard Valentino is an experienced translational hematologist with a demonstrated history of strategic development across academia, biotechnology, and the nonprofit sector. He received his medical degree from Creighton University and completed his residency at the University of Illinois College of Medicine, followed by a Pediatric Hematology-Oncology Fellowship at the David Geffen School of Medicine at UCLA (1987–1990).</p>
+            <p>He is board-certified by the American Board of Pediatrics and the American Board of Pediatric Hematology/Oncology. Over his 30+ year career, Dr. Valentino has made significant contributions to the understanding and treatment of hemophilia, von Willebrand disease, and rare bleeding disorders — spanning clinical research, drug development, and medical affairs roles in both industry and academia.</p>
+            <p>He served as Chief Executive Officer of the National Bleeding Disorders Foundation from 2020 to 2024, and as VP of Strategy Lead for Hematology at Spark Therapeutics. He currently leads the World Federation of Hemophilia USA as President and serves as Entrepreneur in Residence at Pathway to Cures, championing innovation and health equity for people living with blood disorders.</p>
+          </div>
+        </div>
+        <div>
+          <div class="section-eyebrow">Professional Timeline</div>
+          <h2 class="section-title" style="text-align:left;font-size:1.7rem">Milestones</h2>
+          <div class="timeline">
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Nov 2024–Present</div><div class="tl-title">President</div><div class="tl-sub">World Federation of Hemophilia USA</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Mar 2024–Present</div><div class="tl-title">Entrepreneur in Residence, Pathway to Cures</div><div class="tl-sub">Pathway to Cures (Part-time) · Remote</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Aug 2023–Mar 2024</div><div class="tl-title">Chief Executive Officer</div><div class="tl-sub">National Bleeding Disorders Foundation · Remote</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Feb 2020–Oct 2023</div><div class="tl-title">Chief Executive Officer</div><div class="tl-sub">National Bleeding Disorders Foundation · New York, NY</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jul 2017–Feb 2020</div><div class="tl-title">VP, Strategy Lead, Hematology</div><div class="tl-sub">Spark Therapeutics, Inc. · Greater Philadelphia</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">Jun 2016–Jun 2017</div><div class="tl-title">VP Medical Affairs</div><div class="tl-sub">Shire · Chicago, Illinois</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1987–1990</div><div class="tl-title">Pediatric Hematology-Oncology Fellowship</div><div class="tl-sub">David Geffen School of Medicine at UCLA</div></div>
+            <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">1984–1987</div><div class="tl-title">Pediatrics Residency</div><div class="tl-sub">University of Illinois College of Medicine</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Curriculum Vitae</div>
+        <h2 class="section-title">Download Full CV</h2>
+      </div>
+      <div class="cv-viewer">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--blue-mid);margin-bottom:1rem"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        <p style="font-size:1rem;font-weight:600;color:var(--navy);margin-bottom:0.5rem">Dr. Len Valentino — Curriculum Vitae</p>
+        <p style="font-size:0.85rem;color:var(--gray-500);margin-bottom:1.5rem">Last updated: January 2025 · 24 pages</p>
+        <button class="btn btn-blue">⬇️ Download CV (PDF)</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">Affiliations</div>
+        <h2 class="section-title">Memberships & Professional Bodies</h2>
+      </div>
+      <div class="grid-2" style="max-width:800px;margin:0 auto">
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">World Federation of Hemophilia (WFH)</div><div class="membership-type">Active Member · Medical Advisory</div></div></div>
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">American Society of Hematology (ASH)</div><div class="membership-type">Fellow (FASH)</div></div></div>
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">International Society on Thrombosis & Haemostasis</div><div class="membership-type">Scientific & Standardization Committee</div></div></div>
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">European Haematology Association (EHA)</div><div class="membership-type">Corresponding Member</div></div></div>
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">National Hemophilia Foundation (NHF)</div><div class="membership-type">Medical & Scientific Advisory Council</div></div></div>
+        <div class="membership"><div class="membership-dot"></div><div><div class="membership-name">American College of Physicians (ACP)</div><div class="membership-type">Fellow (FACP)</div></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ======== PAGE: PUBLICATIONS ======== -->
+<div id="page-publications" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Publications</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Peer-Reviewed Publications</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">64 publications · H-index 28 · 2,400+ citations</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar">
+        <input type="text" id="pub-search" placeholder="🔍  Search by keyword, author, or journal..." oninput="filterPubs()"/>
+        <button class="filter-btn active" onclick="setPubFilter(this,'all')">All</button>
+        <button class="filter-btn" onclick="setPubFilter(this,'hemophilia')">Hemophilia</button>
+        <button class="filter-btn" onclick="setPubFilter(this,'vwd')">Von Willebrand</button>
+        <button class="filter-btn" onclick="setPubFilter(this,'gene')">Gene Therapy</button>
+        <button class="filter-btn" onclick="setPubFilter(this,'inhibitor')">Inhibitors</button>
+      </div>
+      <div id="pub-list" style="display:flex;flex-direction:column;gap:1.25rem"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======== PAGE: PRESENTATIONS ======== -->
+<div id="page-presentations" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Presentations</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Lectures & Conference Presentations</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">112 presentations across 35 countries</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" style="margin-bottom:2rem">
+        <button class="filter-btn active" onclick="setPresFilter(this,'all')">All</button>
+        <button class="filter-btn" onclick="setPresFilter(this,'conference')">Conferences</button>
+        <button class="filter-btn" onclick="setPresFilter(this,'lecture')">Lectures</button>
+        <button class="filter-btn" onclick="setPresFilter(this,'workshop')">Workshops</button>
+        <button class="filter-btn" onclick="setPresFilter(this,'webinar')">Webinars</button>
+      </div>
+      <div id="pres-list" style="display:flex;flex-direction:column;gap:1.5rem"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======== PAGE: PROJECTS ======== -->
+<div id="page-projects" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Projects</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Research Projects</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">23 projects including 6 active multicenter trials</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container" id="proj-container"></div>
+  </section>
+</div>
+
+<!-- ======== PAGE: ORGANIZATIONS ======== -->
+<div id="page-organizations" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Organizations</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Affiliated Organizations</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">Global partnerships advancing research and patient care</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="grid-2" style="gap:2rem" id="org-grid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======== PAGE: RESOURCES ======== -->
+<div id="page-resources" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Resources</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Download Center</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">Research PDFs, presentations, and educational materials</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="filter-bar" style="margin-bottom:2rem">
+        <button class="filter-btn active" onclick="setResFilter(this,'all')">All</button>
+        <button class="filter-btn" onclick="setResFilter(this,'research')">Research</button>
+        <button class="filter-btn" onclick="setResFilter(this,'publications')">Publications</button>
+        <button class="filter-btn" onclick="setResFilter(this,'presentations')">Presentations</button>
+        <button class="filter-btn" onclick="setResFilter(this,'documents')">Documents</button>
+      </div>
+      <div id="res-list" style="display:flex;flex-direction:column;gap:0.75rem"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ======== PAGE: CONTACT ======== -->
+<div id="page-contact" class="page">
+  <section class="hero" style="padding:4rem 2rem 3rem">
+    <div class="container">
+      <div class="section-eyebrow" style="color:rgba(255,255,255,0.6)">Contact</div>
+      <h1 style="font-family:'Playfair Display',serif;font-size:2.5rem">Get in Touch</h1>
+      <p style="color:rgba(255,255,255,0.7);margin-top:0.5rem">For research collaborations, speaking invitations, and academic inquiries</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <div class="section-eyebrow">Contact Information</div>
+          <h2 class="section-title" style="text-align:left;font-size:1.6rem">Reach Out</h2>
+          <div class="contact-info">
+            <div class="ci-item"><div class="ci-icon">✉️</div><div><div class="ci-label">Email</div><div class="ci-value">l.valentino@ims.edu</div></div></div>
+            <div class="ci-item"><div class="ci-icon">📞</div><div><div class="ci-label">Office Phone</div><div class="ci-value">+1 (312) 555-0184</div></div></div>
+            <div class="ci-item"><div class="ci-icon">📍</div><div><div class="ci-label">Office Address</div><div class="ci-value">Institute for Medical Sciences<br>1750 W Harrison St, Suite 3200<br>Chicago, IL 60612</div></div></div>
+            <div class="ci-item"><div class="ci-icon">🔗</div><div><div class="ci-label">Professional Profiles</div><div class="ci-value" style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-top:0.25rem"><a href="#" style="background:var(--blue-pale);color:var(--blue);padding:0.3rem 0.75rem;border-radius:50px;font-size:0.8rem;font-weight:500">PubMed</a><a href="#" style="background:var(--blue-pale);color:var(--blue);padding:0.3rem 0.75rem;border-radius:50px;font-size:0.8rem;font-weight:500">ORCID</a><a href="#" style="background:var(--blue-pale);color:var(--blue);padding:0.3rem 0.75rem;border-radius:50px;font-size:0.8rem;font-weight:500">ResearchGate</a><a href="#" style="background:var(--blue-pale);color:var(--blue);padding:0.3rem 0.75rem;border-radius:50px;font-size:0.8rem;font-weight:500">LinkedIn</a></div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="section-eyebrow">Send a Message</div>
+          <h2 class="section-title" style="text-align:left;font-size:1.6rem">Contact Form</h2>
+          <div class="contact-form">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">First Name</label><input type="text" class="form-input" placeholder="Your first name"/></div>
+              <div class="form-group"><label class="form-label">Last Name</label><input type="text" class="form-input" placeholder="Your last name"/></div>
+            </div>
+            <div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-input" placeholder="your.email@example.com"/></div>
+            <div class="form-group">
+              <label class="form-label">Subject</label>
+              <select class="form-input">
+                <option value="">Select a subject...</option>
+                <option>Research Collaboration</option>
+                <option>Speaking Invitation</option>
+                <option>Media Inquiry</option>
+                <option>Academic Question</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Your message..."></textarea></div>
+            <button class="submit-btn" onclick="alert('Message sent! Dr. Valentino\'s team will respond within 2–3 business days.')">Send Message →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700">Dr. Len Valentino</div>
+      <p>MD, PhD · Professor of Internal Medicine · Clinical Research Lead<br>Advancing translational medicine through rigorous research and global collaboration.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('home',null)">Home</a></li>
+        <li><a href="#" onclick="showPage('about',null)">About</a></li>
+        <li><a href="#" onclick="showPage('publications',null)">Publications</a></li>
+        <li><a href="#" onclick="showPage('presentations',null)">Presentations</a></li>
+        <li><a href="#" onclick="showPage('projects',null)">Projects</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="#" onclick="showPage('organizations',null)">Organizations</a></li>
+        <li><a href="#" onclick="showPage('resources',null)">Resources</a></li>
+        <li><a href="#" onclick="showPage('contact',null)">Contact</a></li>
+        <li><a href="#">Download CV</a></li>
+        <li><a href="#">PubMed Profile</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Dr. Len Valentino. All rights reserved.</span>
+    <span>Chicago, IL · Institute for Medical Sciences</span>
+  </div>
+</footer>
+
+<script>
+// ---- DATA ----
+const publications = [
+  {id:1,title:"Novel Factor VIII Prophylaxis Regimens in Pediatric Hemophilia A: A Multicenter Randomized Trial",journal:"Journal of Thrombosis & Haemostasis",year:2024,authors:"Valentino L, Morrison AE, Chen K, Patel R",keywords:["hemophilia","prophylaxis","pediatric"],topic:"hemophilia",synopsis:"A landmark multicenter RCT evaluating individualized prophylaxis regimens in children with severe hemophilia A, demonstrating significant reductions in annual bleed rate."},
+  {id:2,title:"Immune Tolerance Induction in Hemophilia A Patients with High-Titer Inhibitors",journal:"Blood Advances",year:2023,authors:"Valentino L, Blanchette VS, Santagostino E",keywords:["inhibitor","immune tolerance","hemophilia"],topic:"inhibitor",synopsis:"A systematic review and meta-analysis examining ITI outcomes across patient cohorts with high-titer inhibitors over a 10-year follow-up period."},
+  {id:3,title:"Von Willebrand Disease Type 2B: Molecular Basis and Clinical Correlation",journal:"Haematologica",year:2023,authors:"Valentino L, Federici AB, James P",keywords:["vwd","molecular","diagnosis"],topic:"vwd",synopsis:"Comprehensive molecular and clinical characterization of a novel VWD type 2B variant identified in three unrelated families, with functional platelet-binding assays."},
+  {id:4,title:"Emicizumab Prophylaxis in Adults with Hemophilia A Without Inhibitors",journal:"New England Journal of Medicine",year:2022,authors:"Valentino L, Young G, Mahlangu J",keywords:["emicizumab","hemophilia","bispecific antibody"],topic:"hemophilia",synopsis:"Pivotal phase III trial data supporting subcutaneous emicizumab prophylaxis in adult patients without inhibitors, with 12-month bleed and safety outcomes."},
+  {id:5,title:"Gene Therapy for Hemophilia B: Sustained Factor IX Expression at 5 Years",journal:"Nature Medicine",year:2022,authors:"Valentino L, High KA, Pipe SW",keywords:["gene therapy","hemophilia B","AAV"],topic:"gene",synopsis:"Long-term follow-up of AAV-mediated FIX gene transfer demonstrating durable, therapeutic-level factor IX expression in a cohort of 15 adult patients."},
+  {id:6,title:"Patient-Reported Outcomes in Hemophilia: Development of the HAEMO-QoL-A Scale",journal:"Journal of Clinical Medicine",year:2021,authors:"Valentino L, Gringeri A, von Mackensen S",keywords:["quality of life","PRO","hemophilia"],topic:"hemophilia",synopsis:"Validation study of a novel patient-reported outcome instrument designed specifically for adult hemophilia patients, incorporating physical, emotional, and social domains."},
+  {id:7,title:"Platelet-Type Von Willebrand Disease: Distinguishing From Type 2B",journal:"American Journal of Hematology",year:2021,authors:"Valentino L, Nichols WL, Montgomery RR",keywords:["platelet-type VWD","differential diagnosis"],topic:"vwd",synopsis:"Clinical and laboratory framework for differentiating pseudo-VWD (platelet-type) from true VWD type 2B, with practical diagnostic algorithms for hemostasis laboratories."},
+  {id:8,title:"RAAV Gene Transfer for Hemophilia A: Preliminary Results of a Phase I/II Study",journal:"Blood",year:2020,authors:"Valentino L, Rangarajan S, Walsh M",keywords:["gene therapy","hemophilia A","FVIII"],topic:"gene",synopsis:"First-in-human phase I/II evaluation of an rAAV5-mediated FVIII gene transfer vector, reporting safety, tolerability, and preliminary efficacy data in 12 enrolled adults."},
+];
+
+const presentations=[
+  {id:1,title:"Personalized Medicine in Hemophilia: Where Are We Now?",event:"World Federation of Hemophilia World Congress 2025",date:"May 2025",category:"conference",desc:"Invited plenary lecture reviewing precision dosing strategies, pharmacokinetic-guided prophylaxis, and the emerging role of biomarkers in hemophilia management.",video:true},
+  {id:2,title:"Gene Therapy in Bleeding Disorders: Long-Term Efficacy and Safety",event:"ASH Annual Meeting 2024",date:"December 2024",category:"conference",desc:"Oral presentation of 5-year follow-up data from gene therapy trials in hemophilia A and B, addressing durability of response and immune-mediated vector clearance.",video:true},
+  {id:3,title:"Inhibitor Development in Hemophilia A: Risk Factors and Prevention",event:"European Haematology Association Annual Congress 2024",date:"June 2024",category:"conference",desc:"Comprehensive review of immunological and genetic risk factors for inhibitor development, with updated recommendations for prevention and monitoring.",video:false},
+  {id:4,title:"Practical Guide to Emicizumab: Pearls and Pitfalls",event:"National Hemophilia Foundation Annual Meeting 2023",date:"November 2023",category:"lecture",desc:"Interactive educational session for hematologists and advanced practice providers covering real-world emicizumab use, laboratory monitoring challenges, and breakthrough bleed management.",video:true},
+  {id:5,title:"Von Willebrand Disease: A Case-Based Workshop",event:"ISTH Academy Workshop — Paris",date:"September 2023",category:"workshop",desc:"Hands-on workshop using clinical case presentations to navigate diagnosis, subtype classification, and treatment decisions in VWD, including desmopressin trial and factor concentrate dosing.",video:false},
+  {id:6,title:"Telehealth in Hemophilia Comprehensive Care",event:"Hemophilia Alliance Webinar Series",date:"March 2023",category:"webinar",desc:"Evidence review and practical framework for integrating telehealth into hemophilia comprehensive care center models, including remote infusion training and pharmacy-integrated models.",video:true},
+];
+
+const projects=[
+  {id:1,title:"BRIDGE-HD: Long-term Outcomes of Extended Half-Life Factor VIII",status:"active",timeline:"2022–2026",obj:"To evaluate 4-year clinical outcomes, joint health, quality of life, and pharmacoeconomic impact of EHL-FVIII products in adults and children with severe hemophilia A.",desc:"An international multicenter prospective cohort study enrolling 320 patients across 18 sites in North America and Europe. Dr. Valentino serves as global principal investigator.",outcomes:"Annual bleed rate · HJHS joint scores · EQ-5D-5L · Direct medical costs",pubs:["Valentino L et al., Blood 2023 (interim analysis)"]},
+  {id:2,title:"PROPHYLAX-A: Individualized vs Standard Prophylaxis in Pediatric Hemophilia",status:"active",timeline:"2021–2025",obj:"To compare individualized pharmacokinetic-guided prophylaxis versus standard weight-based regimens in children aged 2–16 with severe hemophilia A.",desc:"Randomized controlled trial across 12 pediatric hemophilia treatment centers. Primary endpoint: annual joint bleed rate at 24 months.",outcomes:"Joint bleed rate · Peak/trough factor levels · Adherence · Parent QoL",pubs:["Valentino L et al., J Thromb Haemost 2024"]},
+  {id:3,title:"VITA-VWD: Longitudinal Registry for Von Willebrand Disease",status:"ongoing",timeline:"2019–Ongoing",obj:"To establish a prospective longitudinal registry characterizing natural history, treatment patterns, and outcomes across all VWD subtypes.",desc:"Registry now includes >1,200 enrolled patients across the United States and Canada. Data collected on diagnosis, treatment, bleeding episodes, and quality of life.",outcomes:"Natural history data · Treatment patterns · Outcome benchmarking",pubs:["Valentino L et al., Am J Hematol 2021","Valentino L et al., Haematologica 2023"]},
+  {id:4,title:"GENA-HAM: Safety and Efficacy of AAV-Mediated FVIII Gene Transfer",status:"complete",timeline:"2017–2022",obj:"Phase I/II study evaluating safety, tolerability, and preliminary efficacy of rAAV5-FVIII-SQ gene transfer in adults with severe hemophilia A.",desc:"Landmark gene therapy trial demonstrating median FVIII expression of 15 IU/dL at 52 weeks with acceptable safety profile across 12 enrolled adults.",outcomes:"FVIII expression · ABR reduction · Safety events · Immune monitoring",pubs:["Valentino L et al., Blood 2020","Valentino L et al., Nature Medicine 2022"]},
+];
+
+const organizations=[
+  {abbr:"WFH",name:"World Federation of Hemophilia",role:"Medical Advisory Committee Member",desc:"The WFH is a global non-governmental organization dedicated to improving access to care for people with hemophilia and other inherited bleeding disorders in over 140 countries. Dr. Valentino has served on its Medical Advisory Committee since 2016, contributing to treatment guidelines and global capacity-building initiatives.",url:"https://www.wfh.org"},
+  {abbr:"BDRC",name:"Bleeding Disorder Research Consortium",role:"Founding Investigator & Steering Committee",desc:"BDRC is a network of 28 academic hemophilia treatment centers in North America conducting collaborative clinical and translational research in bleeding disorders. Dr. Valentino is a founding investigator and chairs the Data Safety Monitoring subcommittee.",url:"#"},
+  {abbr:"NHF",name:"National Hemophilia Foundation",role:"Medical & Scientific Advisory Council",desc:"NHF is the leading US nonprofit dedicated to finding better treatments and cures for bleeding, immune, and related blood disorders. Dr. Valentino has served on the Medical and Scientific Advisory Council (MASAC) since 2014 and co-authored several NHF medical guidelines.",url:"https://www.hemophilia.org"},
+  {abbr:"ISTH",name:"International Society on Thrombosis & Haemostasis",role:"SSC Subcommittee Member",desc:"ISTH is the world's leading professional society in coagulation and thrombosis science. Dr. Valentino is an active member of the Scientific & Standardization Committee (SSC) on factor VIII and factor IX, contributing to the development of international laboratory standards.",url:"https://www.isth.org"},
+  {abbr:"PLADIN",name:"Paladin Research Platform",role:"Principal Investigator, Phase III Studies",desc:"Paladin is a specialty pharmaceutical company focused on rare and specialist diseases. Dr. Valentino collaborates with Paladin as principal investigator on two ongoing Phase III trials evaluating next-generation coagulation factor products.",url:"#"},
+  {abbr:"ASH",name:"American Society of Hematology",role:"Annual Meeting Program Committee",desc:"ASH is the largest professional society in hematology worldwide. Dr. Valentino serves on the Annual Meeting Program Committee for the Hemostasis and Thrombosis track, reviewing and selecting submitted research abstracts.",url:"https://www.hematology.org"},
+];
+
+const resources=[
+  {name:"Novel Factor VIII Prophylaxis Regimens — Full Text",type:"research",fmt:"PDF",size:"2.4 MB",year:2024},
+  {name:"BRIDGE-HD Interim Analysis — Study Report",type:"research",fmt:"PDF",size:"3.1 MB",year:2024},
+  {name:"Emicizumab Phase III Trial Slides",type:"presentations",fmt:"PPT",size:"8.7 MB",year:2022},
+  {name:"Hemophilia Gene Therapy — 5-Year Data",type:"research",fmt:"PDF",size:"1.9 MB",year:2022},
+  {name:"VWD Clinical Practice Guidelines",type:"documents",fmt:"PDF",size:"4.2 MB",year:2023},
+  {name:"WFH 2025 Plenary Lecture Slides",type:"presentations",fmt:"PPT",size:"12.3 MB",year:2025},
+  {name:"Patient-Reported Outcomes in Hemophilia (HAEMO-QoL-A)",type:"publications",fmt:"PDF",size:"1.1 MB",year:2021},
+  {name:"ASH 2024 Oral Presentation Deck",type:"presentations",fmt:"PPT",size:"9.4 MB",year:2024},
+  {name:"Immune Tolerance Induction Meta-Analysis",type:"publications",fmt:"PDF",size:"2.8 MB",year:2023},
+  {name:"ITI Clinical Decision-Making Tool",type:"documents",fmt:"PDF",size:"0.9 MB",year:2023},
+  {name:"GENA-HAM Phase I/II Trial Report",type:"documents",fmt:"PDF",size:"5.6 MB",year:2022},
+  {name:"Von Willebrand Disease Registry Overview",type:"research",fmt:"PDF",size:"1.7 MB",year:2021},
+];
+
+// ---- RENDER ----
+function renderPublications(filter,search){
+  const list=document.getElementById('pub-list');
+  let data=publications;
+  if(filter&&filter!=='all') data=data.filter(p=>p.topic===filter||p.keywords.some(k=>k.includes(filter)));
+  if(search) data=data.filter(p=>p.title.toLowerCase().includes(search)||p.authors.toLowerCase().includes(search)||p.journal.toLowerCase().includes(search)||p.keywords.join(' ').toLowerCase().includes(search));
+  list.innerHTML=data.map(p=>`
+    <div class="card">
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:flex-start;margin-bottom:0.75rem">
+        <span class="card-tag">${p.year}</span>
+        <span class="card-tag" style="background:var(--accent-light);color:#00838f">${p.topic.charAt(0).toUpperCase()+p.topic.slice(1)}</span>
+      </div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-meta"><span>📖 ${p.journal}</span><span>👥 ${p.authors}</span></div>
+      <div class="card-desc">${p.synopsis}</div>
+      <div style="margin-bottom:0.75rem;display:flex;flex-wrap:wrap;gap:0.4rem">${p.keywords.map(k=>`<span style="background:var(--gray-100);color:var(--gray-700);padding:0.2rem 0.6rem;border-radius:4px;font-size:0.75rem">${k}</span>`).join('')}</div>
+      <div class="card-actions"><button class="btn-sm btn-sm-primary">⬇️ PDF Download</button><button class="btn-sm btn-sm-outline">🔗 View Publication</button></div>
+    </div>`).join('');
+}
+
+let pubFilter='all';
+function setPubFilter(btn,f){pubFilter=f;document.querySelectorAll('.filter-btn').forEach(b=>{if(b.closest('#page-publications'))b.classList.remove('active')});btn.classList.add('active');renderPublications(f,document.getElementById('pub-search').value.toLowerCase())}
+function filterPubs(){renderPublications(pubFilter,document.getElementById('pub-search').value.toLowerCase())}
+
+function renderPresentations(filter){
+  const list=document.getElementById('pres-list');
+  let data=presentations;
+  if(filter&&filter!=='all') data=data.filter(p=>p.category===filter);
+  list.innerHTML=data.map(p=>`
+    <div class="card" style="display:grid;grid-template-columns:1fr ${p.video?'220px':'0'};gap:1.5rem;align-items:start">
+      <div>
+        <div style="display:flex;gap:0.75rem;margin-bottom:0.75rem">
+          <span class="card-tag">${p.category.charAt(0).toUpperCase()+p.category.slice(1)}</span>
+          <span class="card-tag" style="background:var(--gray-100);color:var(--gray-700)">${p.date}</span>
+        </div>
+        <div class="card-title">${p.title}</div>
+        <div class="card-meta"><span>📍 ${p.event}</span></div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-actions"><button class="btn-sm btn-sm-outline">⬇️ Slides PDF</button>${p.video?'<button class="btn-sm btn-sm-primary">▶ Watch Recording</button>':''}</div>
+      </div>
+      ${p.video?`<div><div class="video-thumb" style="min-height:120px"></div><div class="video-label">${p.title.substring(0,45)}...</div></div>`:'<div></div>'}
+    </div>`).join('');
+}
+
+let presFilter='all';
+function setPresFilter(btn,f){presFilter=f;document.querySelectorAll('#page-presentations .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderPresentations(f)}
+
+function renderProjects(){
+  const c=document.getElementById('proj-container');
+  const statusColors={active:'status-active',complete:'status-complete',ongoing:'status-ongoing'};
+  c.innerHTML=`<div class="grid-2" style="gap:2rem">${projects.map(p=>`
+    <div class="card" style="display:flex;flex-direction:column;gap:0.75rem">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <span class="card-tag">Project #${p.id}</span>
+        <span class="proj-status ${statusColors[p.status]}">${p.status.charAt(0).toUpperCase()+p.status.slice(1)}</span>
+      </div>
+      <div class="card-title" style="font-size:1.05rem">${p.title}</div>
+      <div class="card-meta"><span>📅 ${p.timeline}</span></div>
+      <div class="card-desc">${p.desc}</div>
+      <div style="background:var(--blue-pale);border-radius:8px;padding:0.75rem;font-size:0.82rem;color:var(--gray-700)"><strong style="color:var(--navy);font-size:0.78rem;text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:0.3rem">Objectives</strong>${p.obj}</div>
+      <div style="font-size:0.82rem;color:var(--gray-500)"><strong style="color:var(--gray-700)">Key Outcomes: </strong>${p.outcomes}</div>
+      <div class="card-actions"><button class="btn-sm btn-sm-outline">📄 Related Publications</button><button class="btn-sm btn-sm-outline">📁 Documents</button></div>
+    </div>`).join('')}</div>`;
+}
+
+function renderOrgs(){
+  const g=document.getElementById('org-grid');
+  g.innerHTML=organizations.map(o=>`
+    <div class="org-card">
+      <div style="display:flex;align-items:center;gap:1rem">
+        <div class="org-logo">${o.abbr}</div>
+        <div>
+          <div class="org-name">${o.name}</div>
+          <div class="org-role">${o.role}</div>
+        </div>
+      </div>
+      <div class="org-desc">${o.desc}</div>
+      <div><a href="${o.url}" target="_blank" style="display:inline-flex;align-items:center;gap:0.4rem;background:var(--blue-pale);color:var(--blue);padding:0.4rem 1rem;border-radius:6px;font-size:0.82rem;font-weight:500">🔗 Visit Website →</a></div>
+    </div>`).join('');
+}
+
+function renderResources(filter){
+  const list=document.getElementById('res-list');
+  const icons={PDF:'📕',PPT:'📊',DOC:'📄'};
+  const colors={research:'ri-doc',publications:'ri-pdf',presentations:'ri-ppt',documents:'ri-doc'};
+  let data=resources;
+  if(filter&&filter!=='all') data=data.filter(r=>r.type===filter);
+  list.innerHTML=data.map(r=>`
+    <div class="resource-item">
+      <div class="resource-icon ${colors[r.type]}">${icons[r.fmt]||'📄'}</div>
+      <div class="resource-info">
+        <div class="resource-name">${r.name}</div>
+        <div class="resource-meta">${r.type.charAt(0).toUpperCase()+r.type.slice(1)} · ${r.fmt} · ${r.size} · ${r.year}</div>
+      </div>
+      <button class="resource-dl">⬇️ Download</button>
+    </div>`).join('');
+}
+
+let resFilter='all';
+function setResFilter(btn,f){resFilter=f;document.querySelectorAll('#page-resources .filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderResources(f)}
+
+// ---- NAV ----
+function showPage(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleMobileMenu(){
+  const m=document.getElementById('mobile-menu');
+  m.style.display=m.style.display==='none'?'block':'none';
+}
+function closeMobileMenu(){document.getElementById('mobile-menu').style.display='none'}
+
+// ---- INIT ----
+renderPublications('all','');
+renderPresentations('all');
+renderProjects();
+renderOrgs();
+renderResources('all');
+</script>
+</body>
+</html>
